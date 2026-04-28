@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X-REVIVE — Nigeria's First Mega Gaming Festival</title>
+<meta name="description" content="X-REVIVE — Nigeria's first mega gaming festival. Lagos 2027. ₦1M prize pool across 6 game categories. FPS, Football, Battle Royale, Fighting, Racing and Mobile.">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== VARIABLES ===== */
+:root {
+  --green:   #00FF87;
+  --neon:    #00FF87;
+  --void:    #09090F;
+  --void2:   #0F0F1A;
+  --void3:   #16161E;
+  --card:    #111118;
+  --border:  #222230;
+  --white:   #FFFFFF;
+  --gray:    #AAAABC;
+  --dim:     #555566;
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:600;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:64px;background:var(--void);
+  border-bottom:1px solid var(--neon);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;transition:background .3s;
+}
+nav.scrolled{background:rgba(9,9,15,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
+.nav-logo{display:flex;align-items:center;gap:0;font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;letter-spacing:1px;color:var(--white);line-height:1;}
+.nav-logo .logo-text{display:flex;align-items:center;}
+.logo-mark{width:auto;height:30px;flex-shrink:0;display:block;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--neon);}
+.nav-cta{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#000;background:var(--neon);border:none;padding:10px 20px;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:opacity .2s;white-space:nowrap;}
+.nav-cta:hover{opacity:.85;}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s;}
+
+/* MOBILE DRAWER */
+.drawer{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:var(--void2);border-left:1px solid var(--border);z-index:300;display:flex;flex-direction:column;padding:80px 32px 40px;gap:24px;transition:right .3s ease;}
+.drawer.open{right:0;}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:299;display:none;}
+.drawer-overlay.open{display:block;}
+.drawer a{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);padding:12px 0;border-bottom:1px solid var(--border);transition:color .2s;}
+.drawer a:hover{color:var(--neon);}
+.drawer .drawer-cta{margin-top:auto;background:var(--neon);color:#000;text-align:center;padding:14px;font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 48px 48px;position:relative;overflow:hidden;gap:40px;}
+.hero-bg-rp{position:absolute;font-family:'Orbitron',sans-serif;font-size:min(28vw,380px);font-weight:900;color:rgba(255,255,255,.015);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;letter-spacing:-20px;white-space:nowrap;-webkit-user-select:none;user-select:none;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,135,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,135,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--neon);}
+.hero-eyebrow span{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--neon);}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(44px,6vw,80px);font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:20px;}
+.hero h1 .line2{color:var(--neon);display:block;}
+.hero-sub{font-size:18px;font-weight:600;color:var(--white);max-width:460px;margin-bottom:10px;opacity:.85;}
+.hero-loc{font-size:12px;font-weight:700;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;background:var(--neon);color:#000;border:none;padding:14px 24px;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:opacity .2s,transform .2s;display:inline-block;}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px);}
+.btn-ghost{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);padding:14px 24px;cursor:pointer;transition:border-color .2s,color .2s;display:inline-block;}
+.btn-ghost:hover{border-color:var(--neon);color:var(--neon);}
+.btn-pink{background:var(--neon);color:#000;}
+.btn-pink:hover{opacity:.85;}
+
+/* COUNTDOWN */
+.countdown-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--neon);padding:32px;max-width:380px;margin-left:auto;}
+.cd-label{font-size:11px;letter-spacing:4px;color:var(--white);text-transform:uppercase;font-weight:700;margin-bottom:20px;text-align:center;}
+.cd-boxes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;}
+.cd-cell{background:#0A0A18;border:1px solid var(--border);padding:14px 6px;text-align:center;}
+.cd-num{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:900;color:var(--neon);display:block;line-height:1;}
+.cd-unit{font-size:10px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:4px;display:block;}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.hs{background:rgba(0,255,135,.05);border:1px solid rgba(0,255,135,.15);padding:12px;text-align:center;}
+.hs strong{font-family:'Orbitron',sans-serif;font-size:15px;color:var(--neon);display:block;font-weight:700;}
+.hs span{font-size:10px;color:var(--white);letter-spacing:1px;text-transform:uppercase;font-weight:700;}
+
+/* ===== STATS BAR ===== */
+.stats-bar{background:var(--void2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.stat-item strong{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--neon);display:block;}
+.stat-item span{font-size:11px;letter-spacing:2px;color:var(--white);text-transform:uppercase;font-weight:700;}
+
+/* ===== SECTIONS ===== */
+section{padding:80px 48px;}
+.section-eyebrow{font-size:11px;letter-spacing:4px;color:var(--neon);text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:900;margin-bottom:14px;line-height:1.1;}
+.section-sub{font-size:15px;font-weight:600;color:var(--white);opacity:.75;max-width:580px;margin-bottom:48px;}
+
+/* ===== GAMES ===== */
+.games-section{background:var(--void);}
+.games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.game-card{background:var(--card);border:1px solid var(--border);padding:24px;transition:transform .2s,border-color .2s;position:relative;overflow:hidden;}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--neon);}
+.game-card:hover{transform:translateY(-4px);border-color:var(--neon);}
+.game-num{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;margin-bottom:8px;color:var(--neon);}
+.game-title{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;margin-bottom:6px;line-height:1.2;color:var(--white);}
+.game-titles-list{font-size:13px;font-weight:600;color:var(--white);opacity:.7;margin-bottom:16px;}
+.game-prize{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;margin-bottom:12px;color:var(--neon);}
+.slot-bg{background:var(--border);height:3px;border-radius:2px;overflow:hidden;}
+.slot-fill{height:100%;border-radius:2px;background:var(--neon);transition:width 1s ease;}
+.slot-text{font-size:11px;font-weight:700;color:var(--white);opacity:.65;margin-top:6px;letter-spacing:1px;}
+
+/* ===== SCHEDULE ===== */
+.schedule-section{background:var(--void2);}
+.sched-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid var(--border);}
+.tab-btn{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;background:transparent;border:none;color:var(--gray);padding:12px 24px;cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
+.tab-btn.active{color:var(--neon);border-bottom-color:var(--neon);}
+.sched-row{display:grid;grid-template-columns:100px 1fr 140px 110px;gap:16px;padding:14px 0;border-bottom:1px solid #0e0e1a;align-items:center;transition:background .2s;}
+.sched-row:hover{background:rgba(0,255,135,.02);}
+.sched-time{font-family:'Orbitron',sans-serif;font-size:13px;color:var(--neon);font-weight:700;}
+.sched-event{font-size:15px;font-weight:700;color:var(--white);}
+.sched-sub{font-size:12px;font-weight:600;color:var(--gray);margin-top:2px;}
+.sched-arena{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:1px;text-transform:uppercase;}
+.badge{display:inline-block;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:2px;}
+.badge-open{border:1px solid var(--neon);color:var(--neon);background:rgba(0,255,135,.06);}
+.badge-live{background:var(--neon);color:#000;}
+.badge-upcoming{border:1px solid var(--border);color:var(--white);font-weight:700;}
+.badge-finale{background:var(--neon);color:#000;font-weight:900;}
+
+/* ===== TICKETS — 3 TIERS ===== */
+.tickets-section{background:var(--void);}
+.why-pay{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--neon);padding:24px 32px;max-width:760px;margin-bottom:60px;}
+.why-pay h3{font-family:'Orbitron',sans-serif;font-size:14px;color:var(--neon);margin-bottom:10px;letter-spacing:2px;}
+.why-pay p{font-size:15px;font-weight:600;color:var(--white);opacity:.8;line-height:1.7;}
+.tickets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;}
+
+/* Tier card */
+.tier-card{background:var(--card);border:1px solid var(--border);padding:32px;position:relative;transition:transform .2s,border-color .2s;}
+.tier-card:hover{transform:translateY(-6px);}
+.tier-card.featured{border-color:var(--neon);transform:translateY(-8px);}
+.tier-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--neon);color:#000;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 16px;white-space:nowrap;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+.tier-name{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--white);font-weight:700;margin-bottom:10px;}
+.tier-price{font-family:'Orbitron',sans-serif;font-weight:900;line-height:1;margin-bottom:6px;color:var(--white);}
+.tier-card:nth-child(1) .tier-price{font-size:36px;}
+.tier-card:nth-child(2) .tier-price{font-size:44px;color:var(--neon);}
+.tier-card:nth-child(3) .tier-price{font-size:40px;}
+.tier-sub{font-size:13px;font-weight:600;color:var(--gray);margin-bottom:24px;}
+.tier-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.tier-includes{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px;}
+.tier-includes li{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:600;line-height:1.4;color:var(--white);}
+.tier-includes li .tick{flex-shrink:0;font-size:14px;font-weight:900;color:var(--neon);}
+.tier-includes li .cross{flex-shrink:0;font-size:14px;font-weight:900;color:var(--dim);}
+.tier-includes li.locked{color:var(--dim);}
+.tier-cta{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;border:none;padding:14px;cursor:pointer;width:100%;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:opacity .2s,transform .2s;}
+.tier-cta:hover{opacity:.85;transform:translateY(-2px);}
+.tier-card:nth-child(1) .tier-cta{background:var(--void3);color:var(--white);border:1px solid var(--border);}
+.tier-card:nth-child(2) .tier-cta{background:var(--neon);color:#000;}
+.tier-card:nth-child(3) .tier-cta{background:var(--white);color:#000;}
+.tier-card:nth-child(3){border-color:var(--neon);}
+.tier-savings{display:inline-block;background:rgba(0,255,135,.1);border:1px solid var(--neon);color:var(--neon);font-size:11px;font-weight:700;letter-spacing:1px;padding:3px 10px;margin-bottom:16px;}
+
+/* ===== LEADERBOARD ===== */
+.lb-section{background:var(--void2);}
+.lb-table{width:100%;border-collapse:collapse;}
+.lb-table th{font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--white);font-weight:700;padding:8px 16px;text-align:left;border-bottom:1px solid var(--border);}
+.lb-table td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;color:var(--white);}
+.lb-table tr:hover td{background:rgba(0,255,135,.03);}
+.rank-badge{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;}
+.rank-1{background:var(--neon);color:#000;}
+.rank-2{background:#aaa;color:#000;}
+.rank-3{background:#666;color:#fff;}
+.rank-n{background:var(--border);color:var(--white);}
+.player-name{font-weight:700;color:var(--white);}
+.player-city{font-size:11px;color:var(--gray);letter-spacing:1px;font-weight:600;}
+.score-val{font-family:'Orbitron',sans-serif;font-size:13px;color:var(--neon);font-weight:700;}
+.rank-up{color:var(--neon);font-size:12px;font-weight:700;}
+.rank-down{color:var(--white);font-size:12px;font-weight:700;opacity:.5;}
+.demo-badge{display:inline-block;background:rgba(0,255,135,.08);border:1px solid var(--neon);color:var(--neon);font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;padding:6px 14px;margin-bottom:24px;}
+
+/* ===== SPONSORS ===== */
+.sponsors-section{background:var(--void);}
+.sponsor-tiers{display:flex;flex-direction:column;gap:32px;}
+.sponsor-tier-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:16px;padding-left:12px;}
+.sponsor-tier.title-t .sponsor-tier-label{border-left:3px solid var(--neon);color:var(--neon);}
+.sponsor-tier.gold-t .sponsor-tier-label{border-left:3px solid var(--white);color:var(--white);}
+.sponsor-tier.silver-t .sponsor-tier-label{border-left:3px solid var(--gray);color:var(--gray);}
+.sponsor-tier.community-t .sponsor-tier-label{border-left:3px solid var(--dim);color:var(--gray);}
+.sponsor-logos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.sponsor-slot{border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--dim);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;transition:border-color .2s;}
+.sponsor-slot:hover{border-color:var(--neon);color:var(--gray);}
+.sponsor-tier.title-t .sponsor-slot{width:200px;height:64px;}
+.sponsor-tier.gold-t .sponsor-slot{width:160px;height:52px;}
+.sponsor-tier.silver-t .sponsor-slot{width:120px;height:42px;}
+.sponsor-tier.community-t .sponsor-slot{width:90px;height:34px;}
+
+/* Sponsor packages grid */
+.sponsor-packages{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:48px 0;}
+@media(max-width:900px){.sponsor-packages{grid-template-columns:1fr;}}
+.sponsor-pkg{background:var(--card);border:1px solid var(--border);padding:28px;transition:border-color .2s;}
+.sponsor-pkg:hover{border-color:var(--neon);}
+.sponsor-pkg.pkg-title{border-top:3px solid var(--neon);}
+.sponsor-pkg.pkg-gold{border-top:3px solid var(--white);}
+.sponsor-pkg.pkg-silver{border-top:3px solid var(--gray);}
+.sponsor-pkg.pkg-community{border-top:3px solid var(--dim);}
+.pkg-name{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+.sponsor-pkg.pkg-title .pkg-name{color:var(--neon);}
+.sponsor-pkg.pkg-gold .pkg-name{color:var(--white);}
+.sponsor-pkg.pkg-silver .pkg-name{color:var(--gray);}
+.sponsor-pkg.pkg-community .pkg-name{color:var(--dim);}
+.pkg-desc{font-size:14px;font-weight:600;color:var(--white);opacity:.75;line-height:1.6;margin-bottom:16px;}
+.pkg-perks{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.pkg-perks li{font-size:13px;font-weight:600;color:var(--white);opacity:.7;display:flex;align-items:flex-start;gap:8px;}
+.pkg-perks li::before{content:'→';color:var(--neon);flex-shrink:0;}
+
+.become-sponsor-box{margin-top:48px;padding:48px;border:1px solid var(--border);background:rgba(0,255,135,.02);display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+@media(max-width:900px){.become-sponsor-box{grid-template-columns:1fr;text-align:center;}}
+.become-sponsor-box h3{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:var(--white);margin-bottom:12px;}
+.become-sponsor-box p{font-size:15px;font-weight:600;color:var(--white);opacity:.75;line-height:1.7;max-width:560px;}
+
+/* ===== FAQ ===== */
+.faq-section{background:var(--void2);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{background:var(--card);border:1px solid var(--border);padding:24px;cursor:pointer;transition:border-color .2s;}
+.faq-item:hover{border-color:var(--neon);}
+.faq-q{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--white);margin-bottom:10px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.faq-q span{color:var(--neon);font-size:16px;flex-shrink:0;}
+.faq-a{font-size:14px;font-weight:600;color:var(--white);opacity:.75;line-height:1.6;}
+
+/* ===== FOOTER ===== */
+footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 48px 32px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px;}
+.footer-brand-name{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:8px;}
+.footer-brand-name .green{color:var(--neon);}
+.footer-tagline{font-size:13px;font-weight:600;color:var(--white);opacity:.7;line-height:1.6;margin-bottom:20px;}
+.footer-socials{display:flex;gap:8px;}
+.social-btn{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gray);cursor:pointer;transition:border-color .2s,color .2s;text-decoration:none;}
+.social-btn:hover{border-color:var(--neon);color:var(--neon);}
+.social-btn svg{width:18px;height:18px;fill:currentColor;}
+.footer-col h4{font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--neon);margin-bottom:16px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a,.footer-col ul li button{font-size:13px;font-weight:600;color:var(--white);opacity:.65;transition:color .2s,opacity .2s;background:none;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;padding:0;}
+.footer-col ul li a:hover,.footer-col ul li button:hover{color:var(--neon);opacity:1;}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;font-weight:600;color:var(--gray);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a,.footer-legal button{font-size:12px;font-weight:600;color:var(--gray);background:none;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;padding:0;text-decoration:none;transition:color .2s;}
+.footer-legal a:hover,.footer-legal button:hover{color:var(--neon);}
+.footer-hash{color:var(--neon);font-size:12px;letter-spacing:1px;}
+
+/* MOBILE STICKY CTA */
+.mobile-cta-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:var(--void2);border-top:1px solid var(--border);padding:12px 20px;}
+.mobile-cta-bar a{display:block;background:var(--neon);color:#000;font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-align:center;padding:14px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+
+/* ===== MODALS ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--void2);border:1px solid var(--border);border-top:3px solid var(--neon);width:100%;max-width:640px;max-height:90vh;overflow-y:auto;padding:40px;position:relative;}
+.modal-wide{max-width:800px;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--border);color:var(--gray);font-size:18px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;}
+.modal-close:hover{border-color:var(--neon);color:var(--neon);}
+.modal h2{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:var(--white);margin-bottom:8px;letter-spacing:1px;}
+.modal .modal-sub{font-size:13px;font-weight:600;color:var(--gray);margin-bottom:28px;}
+.modal-eyebrow{font-size:11px;letter-spacing:4px;color:var(--neon);text-transform:uppercase;font-weight:700;margin-bottom:8px;}
+
+/* Form styles */
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:8px;}
+.form-group label .optional{color:var(--dim);font-weight:600;text-transform:none;letter-spacing:0;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--void);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;padding:12px 16px;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--neon);}
+.form-group select{appearance:none;cursor:pointer;}
+.form-group textarea{resize:vertical;min-height:120px;}
+.form-group select option{background:var(--void2);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-submit{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;background:var(--neon);color:#000;border:none;padding:14px 28px;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:opacity .2s;width:100%;margin-top:8px;}
+.form-submit:hover{opacity:.85;}
+.form-success{display:none;text-align:center;padding:32px 0;}
+.form-success h3{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--neon);margin-bottom:12px;}
+.form-success p{font-size:15px;font-weight:600;color:var(--white);opacity:.8;line-height:1.6;}
+
+/* Sponsor modal info */
+.sponsor-modal-packages{display:flex;flex-direction:column;gap:16px;margin:24px 0;}
+.smp{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--neon);padding:20px 24px;}
+.smp-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:6px;}
+.smp-desc{font-size:14px;font-weight:600;color:var(--white);opacity:.75;line-height:1.6;}
+.smp.gold .smp-title{color:var(--white);}
+.smp.silver .smp-title{color:var(--gray);}
+.smp.community .smp-title{color:var(--dim);}
+.smp.gold{border-left-color:var(--white);}
+.smp.silver{border-left-color:var(--gray);}
+.smp.community{border-left-color:var(--dim);}
+.sponsor-divider{height:1px;background:var(--border);margin:28px 0;}
+
+/* Privacy / Terms modal */
+.legal-content{font-size:14px;font-weight:600;color:var(--white);opacity:.8;line-height:1.8;}
+.legal-content h3{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--neon);margin:20px 0 8px;letter-spacing:1px;}
+.legal-content p{margin-bottom:12px;}
+.legal-content ul{padding-left:20px;margin-bottom:12px;}
+.legal-content ul li{margin-bottom:6px;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1100px){
+  .games-grid{grid-template-columns:1fr 1fr;}
+  .tickets-grid{grid-template-columns:1fr;}
+  .tier-card.featured{transform:none;}
+}
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;padding:90px 20px 40px;gap:32px;}
+  .countdown-card{margin:0 auto;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);padding:24px 20px;gap:16px;}
+  section{padding:60px 20px;}
+  .games-grid{grid-template-columns:1fr;}
+  .sched-row{grid-template-columns:80px 1fr 80px;}
+  .sched-arena{display:none;}
+  .tickets-grid{grid-template-columns:1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .mobile-cta-bar{display:block;}
+  .lb-table th:nth-child(4),.lb-table td:nth-child(4){display:none;}
+}
+@media(max-width:600px){
+  .footer-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:40px;}
+  .tickets-grid{grid-template-columns:1fr;}
+  .modal{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo" aria-label="X-REVIVE — Home">
+    <span class="logo-text">RE</span>
+    <svg class="logo-mark" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M24,11 A7,7 0 0,0 24,25"   stroke="#00FF87" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M24,7  A11,11 0 0,0 24,29"  stroke="#00FF87" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M24,3  A15,15 0 0,0 24,33"  stroke="#00FF87" stroke-width="2.4" stroke-linecap="round"/>
+      <polygon points="24,0  20,16  28,16"  fill="#FFFFFF"/>
+      <polygon points="24,36 20,20  28,20"  fill="#FFFFFF"/>
+      <polygon points="0,18  14,13  14,23"  fill="#FFFFFF"/>
+      <polygon points="48,18 34,13  34,23"  fill="#FFFFFF"/>
+      <path d="M24,11 A7,7 0 0,1 24,25"   stroke="#00FF87" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M24,7  A11,11 0 0,1 24,29"  stroke="#00FF87" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M24,3  A15,15 0 0,1 24,33"  stroke="#00FF87" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="19" cy="18" r="2.2" fill="#FFFFFF"/>
+      <circle cx="29" cy="18" r="2.2" fill="#FFFFFF"/>
+    </svg>
+    <span class="logo-text">IVE</span>
+  </a>
+  <div class="nav-links">
+    <a href="#home" class="active">Home</a>
+    <a href="#games">Games</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#tickets">Tickets</a>
+    <a href="#sponsors">Sponsors</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <button type="button" class="nav-cta" onclick="document.getElementById('tickets').scrollIntoView({behavior:'smooth'})">GET TICKETS</button>
+  <button type="button" class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <a href="#home" onclick="closeDrawer()">Home</a>
+  <a href="#games" onclick="closeDrawer()">Games</a>
+  <a href="#schedule" onclick="closeDrawer()">Schedule</a>
+  <a href="#tickets" onclick="closeDrawer()">Tickets</a>
+  <a href="#sponsors" onclick="closeDrawer()">Sponsors</a>
+  <a href="#faq" onclick="closeDrawer()">FAQ</a>
+  <a href="#tickets" class="drawer-cta" onclick="closeDrawer()">BUY YOUR TICKET</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg-rp">XR</div>
+  <div class="hero-grid"></div>
+  <div class="scanlines"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span>Nigeria's First Mega Gaming Festival</span>
+    </div>
+    <h1>X-<span class="line2">REVIVE.</span></h1>
+    <p class="hero-sub">Where Nigerian gamers come to compete, connect, and celebrate the culture they built.</p>
+    <p class="hero-loc">Lagos, Nigeria &nbsp;·&nbsp; 2027 &nbsp;·&nbsp; 1 Day</p>
+    <div class="hero-btns">
+      <a href="#tickets" class="btn-primary">GET YOUR TICKET — FROM ₦5,000</a>
+      <a href="#games" class="btn-ghost">VIEW GAMES</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="countdown-card">
+      <p class="cd-label">Event Starts In</p>
+      <div class="cd-boxes">
+        <div class="cd-cell"><span class="cd-num" id="cd-days">000</span><span class="cd-unit">Days</span></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-hrs">00</span><span class="cd-unit">Hours</span></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-mins">00</span><span class="cd-unit">Mins</span></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-secs">00</span><span class="cd-unit">Secs</span></div>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><strong>500+</strong><span>Players</span></div>
+        <div class="hs"><strong>₦1M</strong><span>Prize Pool</span></div>
+        <div class="hs"><strong>6</strong><span>Game Titles</span></div>
+        <div class="hs"><strong>1</strong><span>Day</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== GAMES ===== -->
+<section id="games" class="games-section">
+  <p class="section-eyebrow">Select Your Game</p>
+  <h2 class="section-title">6 TOURNAMENT CATEGORIES</h2>
+  <p class="section-sub">Register on-site or pre-register online. Competing is completely free once inside.</p>
+  <div class="games-grid">
+
+    <div class="game-card fps">
+      <p class="game-num">01 / FPS</p>
+      <h3 class="game-title">FIRST PERSON SHOOTER</h3>
+      <p class="game-titles-list">Call of Duty · Valorant · CS2</p>
+      <p class="game-prize">₦200,000</p>
+      <div class="slot-bg"><div class="slot-fill" data-fill="72%"></div></div>
+      <p class="slot-text">144 / 200 slots filled</p>
+    </div>
+
+    <div class="game-card football">
+      <p class="game-num">02 / SPORTS</p>
+      <h3 class="game-title">FOOTBALL GAMES</h3>
+      <p class="game-titles-list">EA FC 25 · PES · eFootball</p>
+      <p class="game-prize">₦150,000</p>
+      <div class="slot-bg"><div class="slot-fill" data-fill="61%"></div></div>
+      <p class="slot-text">122 / 200 slots filled</p>
+    </div>
+
+    <div class="game-card royale">
+      <p class="game-num">03 / BATTLE ROYALE</p>
+      <h3 class="game-title">BATTLE ROYALE</h3>
+      <p class="game-titles-list">PUBG · Free Fire · Fortnite</p>
+      <p class="game-prize">₦200,000</p>
+      <div class="slot-bg"><div class="slot-fill" data-fill="84%"></div></div>
+      <p class="slot-text">168 / 200 slots — filling fast!</p>
+    </div>
+
+    <div class="game-card fighting">
+      <p class="game-num">04 / FIGHTING</p>
+      <h3 class="game-title">FIGHTING GAMES</h3>
+      <p class="game-titles-list">Mortal Kombat · Tekken · SF6</p>
+      <p class="game-prize">₦150,000</p>
+      <div class="slot-bg"><div class="slot-fill" data-fill="55%"></div></div>
+      <p class="slot-text">110 / 200 slots filled</p>
+    </div>
+
+    <div class="game-card racing">
+      <p class="game-num">05 / RACING</p>
+      <h3 class="game-title">RACING GAMES</h3>
+      <p class="game-titles-list">Need for Speed · F1 · Forza</p>
+      <p class="game-prize">₦100,000</p>
+      <div class="slot-bg"><div class="slot-fill" data-fill="40%"></div></div>
+      <p class="slot-text">80 / 200 slots filled</p>
+    </div>
+
+    <div class="game-card mobile">
+      <p class="game-num">06 / MOBILE</p>
+      <h3 class="game-title">MOBILE GAMES</h3>
+      <p class="game-titles-list">MLBB · COD Mobile · Clash Royale</p>
+      <p class="game-prize">₦200,000</p>
+      <div class="slot-bg"><div class="slot-fill" data-fill="91%"></div></div>
+      <p class="slot-text">182 / 200 slots — almost full!</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="schedule-section" id="schedule">
+  <p class="section-eyebrow">Event Programme</p>
+  <h2 class="section-title">1-DAY SCHEDULE</h2>
+  <p class="section-sub">All times in West Africa Time (WAT, UTC+1). Brackets update live throughout the day.</p>
+  <div class="sched-tabs">
+    <button type="button" class="tab-btn active" onclick="filterSched('day1',this)">DAY 1</button>
+  </div>
+  <div id="sched-list">
+    <div class="sched-row" data-day="day1">
+      <span class="sched-time">10:00</span>
+      <div><p class="sched-event">Registration &amp; Check-In Opens</p><p class="sched-sub">All 6 tournament arenas · VIP lounge opens</p></div>
+      <span class="sched-arena">Main Entrance</span>
+      <span class="badge badge-open">OPEN</span>
+    </div>
+    <div class="sched-row" data-day="day1">
+      <span class="sched-time">12:00</span>
+      <div><p class="sched-event">Group Stage Begins — All 6 Categories</p><p class="sched-sub">FPS · Football · Battle Royale · Fighting · Racing · Mobile</p></div>
+      <span class="sched-arena">All Arenas</span>
+      <span class="badge badge-open">OPEN</span>
+    </div>
+    <div class="sched-row" data-day="day1">
+      <span class="sched-time">16:00</span>
+      <div><p class="sched-event">Brand Activation Zone Opens</p><p class="sched-sub">Sponsor booths · Giveaways · Product sampling</p></div>
+      <span class="sched-arena">Exhibition Hall</span>
+      <span class="badge badge-upcoming">UPCOMING</span>
+    </div>
+    <div class="sched-row" data-day="day1">
+      <span class="sched-time">20:00</span>
+      <div><p class="sched-event">Opening Night Social</p><p class="sched-sub">Community mixer · Free-play zone · Live entertainment</p></div>
+      <span class="sched-arena">Main Stage</span>
+      <span class="badge badge-upcoming">UPCOMING</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TICKETS ===== -->
+<section class="tickets-section" id="tickets">
+  <p class="section-eyebrow">Get Your Ticket</p>
+  <h2 class="section-title">CHOOSE YOUR LEVEL.</h2>
+  <p class="section-sub">Three ways to experience X-REVIVE. Each tier unlocks more. Which gamer are you?</p>
+
+  <div class="why-pay">
+    <h3>WHY SHOULD YOU PAY?</h3>
+    <p>Simple. You're not paying to watch. You're paying to be part of something that has never happened in Nigeria before. The ₦5,000 gate gets you in. But the experience you walk away with? That depends on how serious you are. Nigerian gaming culture doesn't need permission — and neither do you. Pick your level and show up.</p>
+  </div>
+
+  <div class="tickets-grid">
+
+    <!-- TIER 1 — GATE PASS -->
+    <div class="tier-card">
+      <p class="tier-name">GATE PASS</p>
+      <p class="tier-price">₦5,000</p>
+      <p class="tier-sub">Per person · Entry for the day</p>
+      <div class="tier-divider"></div>
+      <ul class="tier-includes">
+        <li><span class="tick">✔</span> Entry for the day</li>
+        <li><span class="tick">✔</span> Watch all matches across all arenas</li>
+        <li><span class="tick">✔</span> Food court access</li>
+        <li><span class="tick">✔</span> Event lanyard and badge</li>
+        <li><span class="tick">✔</span> Free-play zone access</li>
+        <li><span class="tick">✔</span> Can register for tournaments on-site on the day (subject to available slots)</li>
+        <li class="locked"><span class="cross">✗</span> Guaranteed tournament spot</li>
+        <li class="locked"><span class="cross">✗</span> Welcome pack &amp; merch</li>
+        <li class="locked"><span class="cross">✗</span> VIP lounge access</li>
+        <li class="locked"><span class="cross">✗</span> Pro gamer meet &amp; greet</li>
+      </ul>
+      <button type="button" class="tier-cta" onclick="handleTicket('gate')">BUY GATE PASS — ₦5,000</button>
+    </div>
+
+    <!-- TIER 2 — ARENA PASS (FEATURED) -->
+    <div class="tier-card featured">
+      <div class="tier-badge">MOST POPULAR</div>
+      <p class="tier-name">ARENA PASS</p>
+      <p class="tier-price">₦15,000</p>
+      <p class="tier-sub">Per person · Full competitor experience</p>
+      <div class="tier-divider"></div>
+      <ul class="tier-includes">
+        <li><span class="tick">✔</span> Everything in Gate Pass</li>
+        <li><span class="tick">✔</span> <strong>Guaranteed tournament spot</strong> — pre-register your game category before the day</li>
+        <li><span class="tick">✔</span> <strong>Priority bracket seeding</strong></li>
+        <li><span class="tick">✔</span> Official X-REVIVE <strong>welcome pack</strong></li>
+        <li><span class="tick">✔</span> Reserved seating at semi-finals &amp; grand finals</li>
+        <li><span class="tick">✔</span> Digital player profile on the live leaderboard</li>
+        <li class="locked"><span class="cross">✗</span> VIP lounge access</li>
+        <li class="locked"><span class="cross">✗</span> Pro gamer meet &amp; greet</li>
+        <li class="locked"><span class="cross">✗</span> Closing afterparty access</li>
+      </ul>
+      <button type="button" class="tier-cta" onclick="handleTicket('arena')">GET ARENA PASS — ₦15,000</button>
+    </div>
+
+    <!-- TIER 3 — ELITE VIP -->
+    <div class="tier-card">
+      <div class="tier-savings">ULTIMATE EXPERIENCE</div>
+      <p class="tier-name">ELITE VIP</p>
+      <p class="tier-price">₦35,000</p>
+      <p class="tier-sub">Per person · The full X-REVIVE story</p>
+      <div class="tier-divider"></div>
+      <ul class="tier-includes">
+        <li><span class="tick">✔</span> Everything in Arena Pass</li>
+        <li><span class="tick">✔</span> <strong>VIP lounge access</strong> for the full day</li>
+        <li><span class="tick">✔</span> Meet and greet with featured players</li>
+        <li><span class="tick">✔</span> Front row reserved seating at the grand finals</li>
+        <li><span class="tick">✔</span> X-Revive <strong>heavyweight hoodie</strong></li>
+        <li><span class="tick">✔</span> Dedicated check-in lane — zero queue</li>
+        <li><span class="tick">✔</span> <strong>Closing afterparty</strong> access</li>
+        <li><span class="tick">✔</span> Personalised player ID certificate</li>
+      </ul>
+      <button type="button" class="tier-cta" onclick="handleTicket('elite')">GO ELITE — ₦35,000</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== LEADERBOARD PREVIEW ===== -->
+<section class="lb-section" id="leaderboard">
+  <p class="section-eyebrow">Top Players</p>
+  <h2 class="section-title">LIVE LEADERBOARD</h2>
+  <p class="section-sub">Updated in real-time. See who's climbing the ranks across all 6 categories.</p>
+  <p class="demo-badge">⚡ DEMO DATA — LIVE DURING EVENT</p>
+  <table class="lb-table">
+    <thead>
+      <tr>
+        <th>RANK</th>
+        <th>PLAYER</th>
+        <th>GAME</th>
+        <th>SCORE</th>
+        <th>W/L</th>
+        <th>MOVE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rank-badge rank-1">1</span></td>
+        <td><p class="player-name">XterminatorNG</p><p class="player-city">Lagos</p></td>
+        <td>FPS — COD</td>
+        <td><span class="score-val">9,840</span></td>
+        <td>14 / 2</td>
+        <td><span class="rank-up">▲ 2</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-2">2</span></td>
+        <td><p class="player-name">FreeFire_Abuja</p><p class="player-city">Abuja</p></td>
+        <td>Battle Royale</td>
+        <td><span class="score-val">9,210</span></td>
+        <td>13 / 3</td>
+        <td><span class="rank-up">▲ 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-3">3</span></td>
+        <td><p class="player-name">MLBBKing_PH</p><p class="player-city">Lagos</p></td>
+        <td>Mobile — MLBB</td>
+        <td><span class="score-val">8,950</span></td>
+        <td>12 / 4</td>
+        <td><span class="rank-down">▼ 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-n">4</span></td>
+        <td><p class="player-name">TekkenGod_IB</p><p class="player-city">Ibadan</p></td>
+        <td>Fighting — Tekken</td>
+        <td><span class="score-val">8,600</span></td>
+        <td>11 / 5</td>
+        <td><span class="rank-up">▲ 3</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-n">5</span></td>
+        <td><p class="player-name">FC25_Lagos1</p><p class="player-city">Lagos</p></td>
+        <td>Football — EA FC25</td>
+        <td><span class="score-val">8,310</span></td>
+        <td>10 / 6</td>
+        <td><span class="rank-down">▼ 2</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== SPONSORS ===== -->
+<section class="sponsors-section" id="sponsors">
+  <p class="section-eyebrow">Our Partners</p>
+  <h2 class="section-title">SPONSORS &amp; PARTNERS</h2>
+  <p class="section-sub">The brands building Nigeria's gaming future alongside us. Spots still available — early partners get naming rights and category ownership.</p>
+
+  <div class="sponsor-tiers">
+    <div class="sponsor-tier title-t">
+      <p class="sponsor-tier-label">Title Partner</p>
+      <div class="sponsor-logos">
+        <div class="sponsor-slot">BECOME A PARTNER</div>
+        <div class="sponsor-slot">BECOME A PARTNER</div>
+      </div>
+    </div>
+    <div class="sponsor-tier gold-t">
+      <p class="sponsor-tier-label">Gold Partners</p>
+      <div class="sponsor-logos">
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+      </div>
+    </div>
+    <div class="sponsor-tier silver-t">
+      <p class="sponsor-tier-label">Silver Partners</p>
+      <div class="sponsor-logos">
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+      </div>
+    </div>
+    <div class="sponsor-tier community-t">
+      <p class="sponsor-tier-label">Community Partners</p>
+      <div class="sponsor-logos">
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+        <div class="sponsor-slot">PARTNERSHIP AVAILABLE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What sponsors get -->
+  <div class="sponsor-packages">
+    <div class="sponsor-pkg pkg-title">
+      <p class="pkg-name">Title Partner</p>
+      <p class="pkg-desc">Maximum visibility across every touchpoint. Your brand owns the event narrative from day one.</p>
+      <ul class="pkg-perks">
+        <li>Naming rights across all event materials and signage</li>
+        <li>Category ownership and arena branding</li>
+        <li>Opening ceremony feature placement</li>
+        <li>Dedicated activation space on the floor</li>
+        <li>Social media co-promotion to our full audience</li>
+        <li>Logo on all tickets and confirmation emails</li>
+      </ul>
+    </div>
+    <div class="sponsor-pkg pkg-gold">
+      <p class="pkg-name">Gold Partner</p>
+      <p class="pkg-desc">High-impact brand presence across an entire game category with direct access to the most engaged players.</p>
+      <ul class="pkg-perks">
+        <li>Category title sponsorship (e.g. "X-REVIVE FPS by [Brand]")</li>
+        <li>Stage presence during category finals</li>
+        <li>Branded prize presentation moment</li>
+        <li>Logo placement on category signage and digital screens</li>
+        <li>Brand activation booth in the venue</li>
+      </ul>
+    </div>
+    <div class="sponsor-pkg pkg-silver">
+      <p class="pkg-name">Silver Partner</p>
+      <p class="pkg-desc">Strong brand presence with targeted exposure to Nigeria's most active gaming audience.</p>
+      <ul class="pkg-perks">
+        <li>Logo placement across print and digital collateral</li>
+        <li>Social media mention across all channels</li>
+        <li>Booth space in the brand activation zone</li>
+        <li>Product sampling or giveaway opportunity</li>
+      </ul>
+    </div>
+    <div class="sponsor-pkg pkg-community">
+      <p class="pkg-name">Community Partner</p>
+      <p class="pkg-desc">The perfect entry point for brands that want to show up for the Nigerian gaming community.</p>
+      <ul class="pkg-perks">
+        <li>Logo on event website and programme</li>
+        <li>Social media shoutout during build-up</li>
+        <li>Recognition at the event</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="become-sponsor-box">
+    <div>
+      <h3>Ready to be part of this?</h3>
+      <p>X-REVIVE is Nigeria's first dedicated gaming festival. We are bringing together 500+ competitive gamers, spectators, and the most passionate gaming community the country has ever seen — all under one roof in Lagos. Your brand deserves to be in that room.</p>
+    </div>
+    <button type="button" class="btn-primary" onclick="openModal('sponsorModal')">BECOME A SPONSOR →</button>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section" id="faq">
+  <p class="section-eyebrow">Questions</p>
+  <h2 class="section-title">FREQUENTLY ASKED</h2>
+  <p class="section-sub">Everything you need to know before you show up.</p>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <p class="faq-q">Do I need to buy a separate ticket to compete? <span>+</span></p>
+      <p class="faq-a">No. Once you are inside the venue, all 6 tournament categories are completely free to enter. The gate fee covers everything. Arena Pass holders get priority seeding.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What's the difference between Gate, Arena, and Elite? <span>+</span></p>
+      <p class="faq-a">Gate gets you in. Arena upgrades your experience — priority seeding, jersey, reserved seats, welcome pack. Elite is the full package: VIP lounge, pro meet &amp; greet, front row, hoodie, afterparty.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can I compete in more than one game category? <span>+</span></p>
+      <p class="faq-a">Yes. You can register for multiple categories on-site subject to bracket capacity. Pre-registration via Arena or Elite Pass guarantees your spot before the day.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Do I need to bring my own controller or equipment? <span>+</span></p>
+      <p class="faq-a">All tournament equipment is provided including consoles, monitors, controllers, and headsets. You may bring your own licensed peripheral but it must be approved by tournament officials on arrival.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Is this event for spectators only or for players? <span>+</span></p>
+      <p class="faq-a">Both. Every ticket holder can watch every match from the arena floor. And every ticket holder can also compete — there's no separate player registration fee at the gate.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">How do I pay and how do I get confirmation? <span>+</span></p>
+      <p class="faq-a">Payment is processed via Paystack — supporting cards, bank transfer, USSD, and mobile money. You'll receive a confirmation email with your Player ID within minutes of purchase.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can people travel from outside Lagos? <span>+</span></p>
+      <p class="faq-a">Absolutely. We're already seeing pre-registration interest from Abuja, Port Harcourt, Ibadan, and beyond. Elite VIP includes priority check-in to help with travel logistics.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">When does the venue and date get confirmed? <span>+</span></p>
+      <p class="faq-a">The confirmed venue and exact date will be locked and announced publicly in 2026. All registered ticket holders will be notified first by email.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand-name">X-<span class="green">REVIVE</span></p>
+      <p class="footer-tagline">Nigeria's gamers have been here all along.<br>X-REVIVE just built them a home.</p>
+      <div class="footer-socials">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/xrevivefest/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <!-- X / Twitter -->
+        <a href="https://x.com/xrevivefest" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Event</h4>
+      <ul>
+        <li><a href="#home">About X-REVIVE</a></li>
+        <li><a href="#games">Games &amp; Tournaments</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#">Venue &amp; Map</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Players</h4>
+      <ul>
+        <li><a href="#tickets">Buy Your Ticket</a></li>
+        <li><a href="#leaderboard">Leaderboard</a></li>
+        <li><a href="#">Rules &amp; Format</a></li>
+        <li><a href="#">Player Guide</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><button type="button" onclick="openModal('sponsorModal')">Sponsorship</button></li>
+        <li><button type="button" onclick="openContactForm('Media and Press')">Media / Press</button></li>
+        <li><button type="button" onclick="openContactForm('Volunteer')">Volunteer</button></li>
+        <li><button type="button" onclick="openModal('contactModal')">Contact Us</button></li>
+        <li><button type="button" onclick="openModal('newsletterModal')">Newsletter</button></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 X-REVIVE · Lagos, Nigeria</p>
+    <p class="footer-hash">#XRevive · #NigeriaGaming · @XReviveFest</p>
+    <div class="footer-legal">
+      <button type="button" onclick="openModal('privacyModal')">Privacy Policy</button>
+      <button type="button" onclick="openModal('termsModal')">Terms &amp; Conditions</button>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY BAR -->
+<div class="mobile-cta-bar" id="mobileCTA">
+  <a href="#tickets">GET YOUR TICKET — FROM ₦5,000</a>
+</div>
+
+<!-- ============================= MODALS ============================= -->
+
+<!-- CONTACT US MODAL -->
+<div class="modal-overlay" id="contactModal" onclick="overlayClose(event,'contactModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('contactModal')" aria-label="Close">✕</button>
+    <p class="modal-eyebrow">Get in touch</p>
+    <h2>CONTACT US</h2>
+    <p class="modal-sub">Fill in the form below and we will get back to you within 48 hours.</p>
+    <form id="contactForm" onsubmit="submitForm(event,'contactForm','contactSuccess')">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name <span style="color:var(--neon)">*</span></label>
+          <input type="text" name="name" placeholder="First and last name" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address <span style="color:var(--neon)">*</span></label>
+          <input type="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number <span class="optional">(optional)</span></label>
+          <input type="text" name="phone" placeholder="+234 800 000 0000">
+        </div>
+        <div class="form-group">
+          <label>Subject <span style="color:var(--neon)">*</span></label>
+          <select name="subject" id="contactSubject" required>
+            <option value="" disabled selected>Select a subject</option>
+            <option value="General Enquiry">General Enquiry</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Media and Press">Media and Press</option>
+            <option value="Volunteer">Volunteer</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message <span style="color:var(--neon)">*</span></label>
+        <textarea name="message" placeholder="Tell us what's on your mind..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">SEND MESSAGE</button>
+    </form>
+    <div class="form-success" id="contactSuccess">
+      <h3>✓ MESSAGE RECEIVED</h3>
+      <p>Thank you for reaching out. We got your message and will get back to you within 48 hours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER MODAL -->
+<div class="modal-overlay" id="newsletterModal" onclick="overlayClose(event,'newsletterModal')">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" onclick="closeModal('newsletterModal')" aria-label="Close">✕</button>
+    <p class="modal-eyebrow">Stay in the loop</p>
+    <h2>JOIN THE NEWSLETTER</h2>
+    <p class="modal-sub">We only email when there is something real to say. No spam, ever.</p>
+    <form id="newsletterForm" onsubmit="submitForm(event,'newsletterForm','newsletterSuccess')">
+      <div class="form-group">
+        <label>First Name <span style="color:var(--neon)">*</span></label>
+        <input type="text" name="firstName" placeholder="Your first name" required>
+      </div>
+      <div class="form-group">
+        <label>Email Address <span style="color:var(--neon)">*</span></label>
+        <input type="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <button type="submit" class="form-submit">KEEP ME UPDATED</button>
+    </form>
+    <div class="form-success" id="newsletterSuccess">
+      <h3>✓ YOU ARE IN</h3>
+      <p>We will only email you when there is something real to say.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SPONSOR MODAL (read more → apply) -->
+<div class="modal-overlay" id="sponsorModal" onclick="overlayClose(event,'sponsorModal')">
+  <div class="modal modal-wide">
+    <button class="modal-close" onclick="closeModal('sponsorModal')" aria-label="Close">✕</button>
+
+    <!-- Info view -->
+    <div id="sponsorInfo">
+      <p class="modal-eyebrow">Partner with X-REVIVE</p>
+      <h2>BECOME A SPONSOR</h2>
+      <p class="modal-sub">X-REVIVE is Nigeria's first mega gaming festival — 500+ competitive players, thousands of spectators, and a community that has been waiting for this moment. Here is what your brand gets when you step inside.</p>
+
+      <div class="sponsor-modal-packages">
+        <div class="smp">
+          <p class="smp-title">Title Partner</p>
+          <p class="smp-desc">Naming rights across the entire event. Your brand is woven into every piece of communication, every screen, every stage moment. Maximum reach, maximum recall. Includes arena branding, activation space, social co-promotion, and logo on all tickets.</p>
+        </div>
+        <div class="smp gold">
+          <p class="smp-title">Gold Partner</p>
+          <p class="smp-desc">Own a game category (e.g. "X-REVIVE FPS by [Your Brand]"). Stage presence at the category finals, branded prize presentation moment, dedicated booth, and full digital visibility across that category's audience.</p>
+        </div>
+        <div class="smp silver">
+          <p class="smp-title">Silver Partner</p>
+          <p class="smp-desc">Strong brand presence across print, digital, and on-ground materials. Booth space in the activation zone, product sampling or giveaway rights, and social media exposure to our full audience.</p>
+        </div>
+        <div class="smp community">
+          <p class="smp-title">Community Partner</p>
+          <p class="smp-desc">The entry-level way to back Nigerian gaming. Logo placement across digital and print, social shoutout, and recognition at the event. Perfect for brands showing up for the culture.</p>
+        </div>
+      </div>
+
+      <p style="font-size:14px;font-weight:600;color:var(--gray);line-height:1.7;margin-bottom:24px;">Early partners get the best placement and the most time on our channels before the event. Spots are limited — especially at Title and Gold level. Fill in the form below and our partnerships team will be in touch within 3 business days.</p>
+
+      <button type="button" class="form-submit" onclick="showSponsorForm()" style="width:auto;padding:14px 32px;">APPLY NOW →</button>
+    </div>
+
+    <!-- Application form (hidden until Apply Now clicked) -->
+    <div id="sponsorFormWrap" style="display:none;">
+      <p class="modal-eyebrow">Sponsorship Application</p>
+      <h2>TELL US ABOUT YOUR BRAND</h2>
+      <p class="modal-sub" style="margin-bottom:24px;">Fill in the details below and our partnerships team will be in touch within 3 business days.</p>
+
+      <form id="sponsorForm" onsubmit="submitForm(event,'sponsorForm','sponsorSuccess')">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span style="color:var(--neon)">*</span></label>
+            <input type="text" name="name" placeholder="Contact person at the brand" required>
+          </div>
+          <div class="form-group">
+            <label>Job Title <span class="optional">(optional)</span></label>
+            <input type="text" name="jobTitle" placeholder="Your role">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Company / Brand Name <span style="color:var(--neon)">*</span></label>
+            <input type="text" name="company" placeholder="Name of the organisation" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address <span style="color:var(--neon)">*</span></label>
+            <input type="email" name="email" placeholder="your@company.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number <span style="color:var(--neon)">*</span></label>
+            <input type="text" name="phone" placeholder="+234 800 000 0000" required>
+          </div>
+          <div class="form-group">
+            <label>Sponsorship Tier Interest <span class="optional">(optional)</span></label>
+            <select name="tier">
+              <option value="" disabled selected>Select tier</option>
+              <option value="Title Sponsor">Title Sponsor</option>
+              <option value="Gold Sponsor">Gold Sponsor</option>
+              <option value="Silver Sponsor">Silver Sponsor</option>
+              <option value="Community Partner">Community Partner</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>How did you hear about us? <span class="optional">(optional)</span></label>
+          <select name="source">
+            <option value="" disabled selected>Select one</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Google">Google</option>
+            <option value="Friend or Colleague">Friend or Colleague</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your brand <span class="optional">(optional)</span></label>
+          <textarea name="brandInfo" placeholder="What are you hoping to achieve from this partnership?"></textarea>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button type="button" class="btn-ghost" onclick="showSponsorInfo()" style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:14px 20px;">← BACK</button>
+          <button type="submit" class="form-submit" style="flex:1;">SEND SPONSORSHIP ENQUIRY</button>
+        </div>
+      </form>
+      <div class="form-success" id="sponsorSuccess">
+        <h3>✓ ENQUIRY RECEIVED</h3>
+        <p>Thank you for your interest in X-Revive. Someone from our partnerships team will be in touch within 3 business days.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY POLICY MODAL -->
+<div class="modal-overlay" id="privacyModal" onclick="overlayClose(event,'privacyModal')">
+  <div class="modal modal-wide">
+    <button class="modal-close" onclick="closeModal('privacyModal')" aria-label="Close">✕</button>
+    <p class="modal-eyebrow">Legal</p>
+    <h2>PRIVACY POLICY</h2>
+    <p class="modal-sub">X Revive · x-revive.com · Effective: 2026 · Governed by the Laws of Nigeria</p>
+    <div class="legal-content">
+      <p>This Privacy Policy explains how X Revive collects, uses, stores and protects your personal information when you visit our website, fill out our interest survey, register for our newsletter, or purchase a ticket to our events. We take your privacy seriously and are committed to handling your information with care and transparency.</p>
+      <p>By using our website or submitting your information through any of our forms, you agree to the practices described in this policy.</p>
+
+      <h3>1. WHO WE ARE</h3>
+      <p>X Revive is a gaming festival brand based in Lagos, Nigeria. We organise live gaming events, tournaments and community experiences.<br>Email: info@x-revive.com</p>
+
+      <h3>2. WHAT INFORMATION WE COLLECT</h3>
+      <p>When you interact with X Revive through our website, forms or ticket purchase process, we may collect:</p>
+      <ul>
+        <li>Your full name and email address</li>
+        <li>Your phone number and city or state of residence</li>
+        <li>Your age range, gender, and gaming preferences</li>
+        <li>Payment information processed securely through Paystack — we do not store card details directly</li>
+        <li>Any other information you choose to provide in open text fields on our forms</li>
+      </ul>
+      <p>When you visit our website, certain information may also be collected automatically by our hosting platform and analytics tools — including IP address, browser type, device type, and pages visited.</p>
+
+      <h3>3. HOW WE USE YOUR INFORMATION</h3>
+      <ul>
+        <li>To respond to enquiries submitted through our Contact Us, Sponsorship or Newsletter forms</li>
+        <li>To send you event updates, announcements and information about X Revive</li>
+        <li>To process ticket purchases and send confirmation emails</li>
+        <li>To manage tournament registrations and seeding</li>
+        <li>To analyse our audience data and share aggregated, anonymous insights with potential sponsors — your personal details are never shared individually</li>
+        <li>To improve our website and comply with any legal obligations</li>
+      </ul>
+      <p>We will not sell your personal data to any third party under any circumstances.</p>
+
+      <h3>4. HOW WE SHARE YOUR INFORMATION</h3>
+      <p>We do not sell, rent or trade your personal information. We work with third-party service providers including Paystack (payment processing), Mailchimp (email communications), and our website hosting provider. We may also disclose your information if required to do so by law.</p>
+
+      <h3>5. HOW LONG WE KEEP YOUR INFORMATION</h3>
+      <p>Survey responses and newsletter sign-ups are kept for as long as you remain subscribed or until you ask us to delete your data. Ticket purchase records are kept for a minimum of three years for accounting and legal purposes.</p>
+
+      <h3>6. YOUR RIGHTS</h3>
+      <ul>
+        <li>The right to access the personal information we hold about you</li>
+        <li>The right to request correction or deletion of your information</li>
+        <li>The right to withdraw consent to receive marketing emails at any time</li>
+        <li>The right to object to us processing your information in certain circumstances</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at info@x-revive.com. We will respond within 30 days.</p>
+
+      <h3>7. COOKIES</h3>
+      <p>Our website may use cookies to understand how visitors use our site and to remember your preferences. You can control or disable cookies through your browser settings.</p>
+
+      <h3>8. SECURITY</h3>
+      <p>We take reasonable technical and organisational steps to protect your personal information. Payment processing is handled entirely by Paystack, a PCI-DSS compliant provider.</p>
+
+      <h3>9. CONTACT</h3>
+      <p>X Revive · Lagos, Nigeria · info@x-revive.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- TERMS & CONDITIONS MODAL -->
+<div class="modal-overlay" id="termsModal" onclick="overlayClose(event,'termsModal')">
+  <div class="modal modal-wide">
+    <button class="modal-close" onclick="closeModal('termsModal')" aria-label="Close">✕</button>
+    <p class="modal-eyebrow">Legal</p>
+    <h2>TERMS &amp; CONDITIONS</h2>
+    <p class="modal-sub">X Revive · x-revive.com · Effective: 2026 · Governed by the Laws of Nigeria</p>
+    <div class="legal-content">
+      <p>These Terms and Conditions govern your use of the X Revive website and your attendance at or participation in any X Revive events. By using our website or purchasing a ticket, you agree to these terms in full.</p>
+
+      <h3>1. ABOUT X REVIVE</h3>
+      <p>Business Name: X Revive · Address: Lagos, Nigeria · Email: info@x-revive.com</p>
+
+      <h3>2. USE OF THE WEBSITE</h3>
+      <p>You may use our website for lawful purposes only. You agree not to use our website in any way that is unlawful, harmful, fraudulent, or that infringes on the rights of others. We reserve the right to suspend or restrict access to any user who violates these terms.</p>
+
+      <h3>3. TICKETS AND PURCHASES</h3>
+      <p>Tickets are sold through our website via Paystack. A purchase is complete once payment has been successfully processed and you have received a confirmation email containing your Player ID. Tickets are personal to the individual and are not transferable without our written consent.</p>
+      <p>X Revive is open to attendees of all ages. Attendees under the age of 16 must be accompanied by a parent or guardian throughout the event.</p>
+
+      <h3>4. REFUNDS AND CANCELLATIONS</h3>
+      <p>Once a ticket is purchased it is non-refundable except where X Revive cancels or postpones the event. In the case of cancellation, ticket holders will be offered either a full refund or a credit transferable to a future X Revive event. In the case of postponement, tickets will remain valid for the rescheduled date. All refund requests must be submitted in writing to info@x-revive.com.</p>
+
+      <h3>5. EVENT RULES AND CONDUCT</h3>
+      <p>All attendees are expected to behave respectfully at all times. We operate a zero tolerance policy toward discrimination, harassment, bullying, or violence. Any attendee found in breach of this code may be removed from the event without a refund.</p>
+      <p>All tournament participants must comply with the official X Revive tournament rules. Participants agree to the decisions of tournament officials as final. Any attempt to cheat will result in immediate disqualification.</p>
+
+      <h3>6. INTELLECTUAL PROPERTY</h3>
+      <p>All content on the X Revive website including the logo, brand name, graphics, and text is the intellectual property of X Revive. You may not reproduce, copy, distribute or use any of our content without prior written permission.</p>
+
+      <h3>7. LIMITATION OF LIABILITY</h3>
+      <p>To the fullest extent permitted by Nigerian law, X Revive accepts no liability for any loss, damage, injury or disappointment suffered by any attendee at our events, except where such loss results from our negligence or wilful misconduct.</p>
+
+      <h3>8. GOVERNING LAW</h3>
+      <p>These Terms and Conditions are governed by the laws of the Federal Republic of Nigeria. Any disputes shall be subject to the exclusive jurisdiction of the courts of Lagos State, Nigeria.</p>
+
+      <h3>9. CONTACT</h3>
+      <p>X Revive · Lagos, Nigeria · info@x-revive.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ── CONFIG ──────────────────────────────────────
+const EVENT_DATE = new Date('2027-05-01T10:00:00+01:00');
+
+// ── COUNTDOWN ───────────────────────────────────
+function updateCountdown(){
+  const diff = EVENT_DATE - new Date();
+  if(diff <= 0) return;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(3,'0');
+  document.getElementById('cd-hrs').textContent  = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── NAV SCROLL ──────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  const ticketsSect = document.getElementById('tickets');
+  if(ticketsSect){
+    const rect = ticketsSect.getBoundingClientRect();
+    const bar = document.getElementById('mobileCTA');
+    if(bar) bar.style.display = rect.bottom < 0 ? 'none' : 'block';
+  }
+});
+
+// ── HAMBURGER ───────────────────────────────────
+document.getElementById('hamburger').addEventListener('click',()=>{
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+});
+document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+
+// ── SLOT FILL BARS ───────────────────────────────
+const barObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const fill = e.target.querySelector('[data-fill]');
+    if(fill) setTimeout(()=>{ fill.style.width = fill.dataset.fill; }, 100);
+    barObs.unobserve(e.target);
+  });
+});
+document.querySelectorAll('.game-card').forEach(el => barObs.observe(el));
+
+// ── SCHEDULE TABS ────────────────────────────────
+function filterSched(day, btn){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.sched-row').forEach(row=>{
+    row.style.display = row.dataset.day === day ? 'grid' : 'none';
+  });
+}
+
+// ── TICKET HANDLER ───────────────────────────────
+function handleTicket(tier){
+  const prices = { gate: 5000, arena: 15000, elite: 35000 };
+  const names  = { gate: 'Gate Pass', arena: 'Arena Pass', elite: 'Elite VIP' };
+  alert(`You selected: X-REVIVE ${names[tier]} — ₦${prices[tier].toLocaleString()}\n\nPaystack integration goes here.\nContact: info@x-revive.com`);
+}
+
+// ── ACTIVE NAV ON SCROLL ─────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id);
+      });
+    }
+  });
+},{ threshold: 0.4 });
+sections.forEach(s => navObs.observe(s));
+
+// ── MODAL SYSTEM ─────────────────────────────────
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function overlayClose(e, id){
+  if(e.target === document.getElementById(id)) closeModal(id);
+}
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(m=>{ m.classList.remove('open'); });
+    document.body.style.overflow = '';
+  }
+});
+
+// Pre-select subject in Contact form
+function openContactForm(subject){
+  openModal('contactModal');
+  const sel = document.getElementById('contactSubject');
+  if(sel && subject){
+    sel.value = subject;
+  }
+}
+
+// ── SPONSOR MODAL VIEWS ──────────────────────────
+function showSponsorForm(){
+  document.getElementById('sponsorInfo').style.display = 'none';
+  document.getElementById('sponsorFormWrap').style.display = 'block';
+}
+function showSponsorInfo(){
+  document.getElementById('sponsorFormWrap').style.display = 'none';
+  document.getElementById('sponsorInfo').style.display = 'block';
+}
+
+// ── FORM SUBMISSION ──────────────────────────────
+// Forms are currently set up to show a success state client-side.
+// To wire up email delivery: sign up at formspree.io, create a form,
+// and replace the fetch URL below with your Formspree endpoint,
+// OR integrate Mailchimp for newsletter signups via their API.
+function submitForm(e, formId, successId){
+  e.preventDefault();
+  const form = document.getElementById(formId);
+  const btn  = form.querySelector('.form-submit');
+  btn.textContent = 'SENDING...';
+  btn.disabled = true;
+
+  // Collect form data to send
+  const data = new FormData(form);
+
+  // --- Formspree integration (replace YOUR_FORM_ID with actual ID) ---
+  // fetch('https://formspree.io/f/YOUR_FORM_ID', {
+  //   method: 'POST',
+  //   body: data,
+  //   headers: { 'Accept': 'application/json' }
+  // }).then(r => {
+  //   if(r.ok){ showSuccess(form, successId); }
+  //   else { btn.textContent = 'TRY AGAIN'; btn.disabled = false; }
+  // });
+
+  // Simulated success for now (remove this block once Formspree is wired):
+  setTimeout(()=>{ showSuccess(form, successId); }, 800);
+}
+
+function showSuccess(form, successId){
+  form.style.display = 'none';
+  const successEl = document.getElementById(successId);
+  if(successEl){ successEl.style.display = 'block'; }
+}
+</script>
+</body>
+</html>
