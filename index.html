@@ -261,11 +261,13 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
 .modal-overlay.open{opacity:1;pointer-events:all;}
 .modal{background:var(--void2);border:1px solid var(--border);border-top:3px solid var(--neon);width:100%;max-width:640px;max-height:90vh;overflow-y:auto;padding:40px;position:relative;}
 .modal-wide{max-width:800px;}
+.modal-narrow{max-width:480px;}
 .modal-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--border);color:var(--gray);font-size:18px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;}
 .modal-close:hover{border-color:var(--neon);color:var(--neon);}
 .modal h2{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:var(--white);margin-bottom:8px;letter-spacing:1px;}
 .modal .modal-sub{font-size:13px;font-weight:600;color:var(--gray);margin-bottom:28px;}
 .modal-eyebrow{font-size:11px;letter-spacing:4px;color:var(--neon);text-transform:uppercase;font-weight:700;margin-bottom:8px;}
+.modal-sub-spaced{font-size:13px;font-weight:600;color:var(--gray);margin-bottom:24px;}
 
 /* Form styles */
 .form-group{margin-bottom:18px;}
@@ -280,9 +282,16 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
 @media(max-width:600px){.form-row{grid-template-columns:1fr;}}
 .form-submit{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;background:var(--neon);color:#000;border:none;padding:14px 28px;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:opacity .2s;width:100%;margin-top:8px;}
 .form-submit:hover{opacity:.85;}
+.form-submit-inline{width:auto;padding:14px 32px;}
+.form-submit-flex{flex:1;}
+.form-btn-row{display:flex;gap:12px;flex-wrap:wrap;}
 .form-success{display:none;text-align:center;padding:32px 0;}
 .form-success h3{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--neon);margin-bottom:12px;}
 .form-success p{font-size:15px;font-weight:600;color:var(--white);opacity:.8;line-height:1.6;}
+.req-star{color:var(--neon);}
+.hidden{display:none;}
+.sponsor-cta-note{font-size:14px;font-weight:600;color:var(--gray);line-height:1.7;margin-bottom:24px;}
+.sponsor-view{display:block;}
 
 /* Sponsor modal info */
 .sponsor-modal-packages{display:flex;flex-direction:column;gap:16px;margin:24px 0;}
@@ -879,22 +888,22 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
     <form id="contactForm" onsubmit="submitForm(event,'contactForm','contactSuccess')">
       <div class="form-row">
         <div class="form-group">
-          <label>Full Name <span style="color:var(--neon)">*</span></label>
-          <input type="text" name="name" placeholder="First and last name" required>
+          <label for="contactName">Full Name <span class="req-star">*</span></label>
+          <input type="text" id="contactName" name="name" placeholder="First and last name" required>
         </div>
         <div class="form-group">
-          <label>Email Address <span style="color:var(--neon)">*</span></label>
-          <input type="email" name="email" placeholder="your@email.com" required>
+          <label for="contactEmail">Email Address <span class="req-star">*</span></label>
+          <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Phone Number <span class="optional">(optional)</span></label>
-          <input type="text" name="phone" placeholder="+234 800 000 0000">
+          <label for="contactPhone">Phone Number <span class="optional">(optional)</span></label>
+          <input type="text" id="contactPhone" name="phone" placeholder="+234 800 000 0000">
         </div>
         <div class="form-group">
-          <label>Subject <span style="color:var(--neon)">*</span></label>
-          <select name="subject" id="contactSubject" required>
+          <label for="contactSubject">Subject <span class="req-star">*</span></label>
+          <select name="subject" id="contactSubject" title="Select a subject" required>
             <option value="" disabled selected>Select a subject</option>
             <option value="General Enquiry">General Enquiry</option>
             <option value="Partnership">Partnership</option>
@@ -905,8 +914,8 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
         </div>
       </div>
       <div class="form-group">
-        <label>Message <span style="color:var(--neon)">*</span></label>
-        <textarea name="message" placeholder="Tell us what's on your mind..." required></textarea>
+        <label for="contactMessage">Message <span class="req-star">*</span></label>
+        <textarea id="contactMessage" name="message" placeholder="Tell us what's on your mind..." required></textarea>
       </div>
       <button type="submit" class="form-submit">SEND MESSAGE</button>
     </form>
@@ -919,19 +928,19 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
 
 <!-- NEWSLETTER MODAL -->
 <div class="modal-overlay" id="newsletterModal" onclick="overlayClose(event,'newsletterModal')">
-  <div class="modal" style="max-width:480px;">
+  <div class="modal modal-narrow">
     <button class="modal-close" onclick="closeModal('newsletterModal')" aria-label="Close">✕</button>
     <p class="modal-eyebrow">Stay in the loop</p>
     <h2>JOIN THE NEWSLETTER</h2>
     <p class="modal-sub">We only email when there is something real to say. No spam, ever.</p>
     <form id="newsletterForm" onsubmit="submitForm(event,'newsletterForm','newsletterSuccess')">
       <div class="form-group">
-        <label>First Name <span style="color:var(--neon)">*</span></label>
-        <input type="text" name="firstName" placeholder="Your first name" required>
+        <label for="nlFirstName">First Name <span class="req-star">*</span></label>
+        <input type="text" id="nlFirstName" name="firstName" placeholder="Your first name" required>
       </div>
       <div class="form-group">
-        <label>Email Address <span style="color:var(--neon)">*</span></label>
-        <input type="email" name="email" placeholder="your@email.com" required>
+        <label for="nlEmail">Email Address <span class="req-star">*</span></label>
+        <input type="email" id="nlEmail" name="email" placeholder="your@email.com" required>
       </div>
       <button type="submit" class="form-submit">KEEP ME UPDATED</button>
     </form>
@@ -948,7 +957,7 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
     <button class="modal-close" onclick="closeModal('sponsorModal')" aria-label="Close">✕</button>
 
     <!-- Info view -->
-    <div id="sponsorInfo">
+    <div id="sponsorInfo" class="sponsor-view">
       <p class="modal-eyebrow">Partner with X-REVIVE</p>
       <h2>BECOME A SPONSOR</h2>
       <p class="modal-sub">X-REVIVE is Nigeria's first mega gaming festival — 500+ competitive players, thousands of spectators, and a community that has been waiting for this moment. Here is what your brand gets when you step inside.</p>
@@ -972,46 +981,46 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
         </div>
       </div>
 
-      <p style="font-size:14px;font-weight:600;color:var(--gray);line-height:1.7;margin-bottom:24px;">Early partners get the best placement and the most time on our channels before the event. Spots are limited — especially at Title and Gold level. Fill in the form below and our partnerships team will be in touch within 3 business days.</p>
+      <p class="sponsor-cta-note">Early partners get the best placement and the most time on our channels before the event. Spots are limited — especially at Title and Gold level. Fill in the form below and our partnerships team will be in touch within 3 business days.</p>
 
-      <button type="button" class="form-submit" onclick="showSponsorForm()" style="width:auto;padding:14px 32px;">APPLY NOW →</button>
+      <button type="button" class="form-submit form-submit-inline" onclick="showSponsorForm()">APPLY NOW →</button>
     </div>
 
     <!-- Application form (hidden until Apply Now clicked) -->
-    <div id="sponsorFormWrap" style="display:none;">
+    <div id="sponsorFormWrap" class="sponsor-view hidden">
       <p class="modal-eyebrow">Sponsorship Application</p>
       <h2>TELL US ABOUT YOUR BRAND</h2>
-      <p class="modal-sub" style="margin-bottom:24px;">Fill in the details below and our partnerships team will be in touch within 3 business days.</p>
+      <p class="modal-sub modal-sub-spaced">Fill in the details below and our partnerships team will be in touch within 3 business days.</p>
 
       <form id="sponsorForm" onsubmit="submitForm(event,'sponsorForm','sponsorSuccess')">
         <div class="form-row">
           <div class="form-group">
-            <label>Full Name <span style="color:var(--neon)">*</span></label>
-            <input type="text" name="name" placeholder="Contact person at the brand" required>
+            <label for="spName">Full Name <span class="req-star">*</span></label>
+            <input type="text" id="spName" name="name" placeholder="Contact person at the brand" required>
           </div>
           <div class="form-group">
-            <label>Job Title <span class="optional">(optional)</span></label>
-            <input type="text" name="jobTitle" placeholder="Your role">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Company / Brand Name <span style="color:var(--neon)">*</span></label>
-            <input type="text" name="company" placeholder="Name of the organisation" required>
-          </div>
-          <div class="form-group">
-            <label>Email Address <span style="color:var(--neon)">*</span></label>
-            <input type="email" name="email" placeholder="your@company.com" required>
+            <label for="spJobTitle">Job Title <span class="optional">(optional)</span></label>
+            <input type="text" id="spJobTitle" name="jobTitle" placeholder="Your role">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Phone Number <span style="color:var(--neon)">*</span></label>
-            <input type="text" name="phone" placeholder="+234 800 000 0000" required>
+            <label for="spCompany">Company / Brand Name <span class="req-star">*</span></label>
+            <input type="text" id="spCompany" name="company" placeholder="Name of the organisation" required>
           </div>
           <div class="form-group">
-            <label>Sponsorship Tier Interest <span class="optional">(optional)</span></label>
-            <select name="tier">
+            <label for="spEmail">Email Address <span class="req-star">*</span></label>
+            <input type="email" id="spEmail" name="email" placeholder="your@company.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="spPhone">Phone Number <span class="req-star">*</span></label>
+            <input type="text" id="spPhone" name="phone" placeholder="+234 800 000 0000" required>
+          </div>
+          <div class="form-group">
+            <label for="spTier">Sponsorship Tier Interest <span class="optional">(optional)</span></label>
+            <select id="spTier" name="tier" title="Select sponsorship tier">
               <option value="" disabled selected>Select tier</option>
               <option value="Title Sponsor">Title Sponsor</option>
               <option value="Gold Sponsor">Gold Sponsor</option>
@@ -1022,8 +1031,8 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
           </div>
         </div>
         <div class="form-group">
-          <label>How did you hear about us? <span class="optional">(optional)</span></label>
-          <select name="source">
+          <label for="spSource">How did you hear about us? <span class="optional">(optional)</span></label>
+          <select id="spSource" name="source" title="How did you hear about us">
             <option value="" disabled selected>Select one</option>
             <option value="Instagram">Instagram</option>
             <option value="Twitter">Twitter</option>
@@ -1033,12 +1042,12 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
           </select>
         </div>
         <div class="form-group">
-          <label>Tell us about your brand <span class="optional">(optional)</span></label>
-          <textarea name="brandInfo" placeholder="What are you hoping to achieve from this partnership?"></textarea>
+          <label for="spBrand">Tell us about your brand <span class="optional">(optional)</span></label>
+          <textarea id="spBrand" name="brandInfo" placeholder="What are you hoping to achieve from this partnership?"></textarea>
         </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button type="button" class="btn-ghost" onclick="showSponsorInfo()" style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;padding:14px 20px;">← BACK</button>
-          <button type="submit" class="form-submit" style="flex:1;">SEND SPONSORSHIP ENQUIRY</button>
+        <div class="form-btn-row">
+          <button type="button" class="btn-ghost" onclick="showSponsorInfo()">← BACK</button>
+          <button type="submit" class="form-submit form-submit-flex">SEND SPONSORSHIP ENQUIRY</button>
         </div>
       </form>
       <div class="form-success" id="sponsorSuccess">
@@ -1268,12 +1277,12 @@ function openContactForm(subject){
 
 // ── SPONSOR MODAL VIEWS ──────────────────────────
 function showSponsorForm(){
-  document.getElementById('sponsorInfo').style.display = 'none';
-  document.getElementById('sponsorFormWrap').style.display = 'block';
+  document.getElementById('sponsorInfo').classList.add('hidden');
+  document.getElementById('sponsorFormWrap').classList.remove('hidden');
 }
 function showSponsorInfo(){
-  document.getElementById('sponsorFormWrap').style.display = 'none';
-  document.getElementById('sponsorInfo').style.display = 'block';
+  document.getElementById('sponsorFormWrap').classList.add('hidden');
+  document.getElementById('sponsorInfo').classList.remove('hidden');
 }
 
 // ── FORM SUBMISSION ──────────────────────────────
