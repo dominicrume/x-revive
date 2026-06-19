@@ -1162,7 +1162,38 @@ footer{background:var(--void2);border-top:1px solid var(--border);padding:56px 4
   </div>
 </div>
 
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal" onclick="overlayClose(event,'checkoutModal')">
+  <div class="modal modal-narrow">
+    <button class="modal-close" onclick="closeModal('checkoutModal')" aria-label="Close">✕</button>
+    <p class="modal-eyebrow">Checkout</p>
+    <h2>COMPLETE PURCHASE</h2>
+    <p class="modal-sub" id="checkoutSub">You are purchasing a ticket.</p>
+    
+    <div id="checkoutFormWrap" class="sponsor-view">
+      <form id="checkoutForm" onsubmit="processPayment(event)">
+        <div class="form-group">
+          <label for="checkoutName">Full Name <span class="req-star">*</span></label>
+          <input type="text" id="checkoutName" name="name" placeholder="First and last name" required>
+        </div>
+        <div class="form-group">
+          <label for="checkoutEmail">Email Address <span class="req-star">*</span></label>
+          <input type="email" id="checkoutEmail" name="email" placeholder="your@email.com" required>
+        </div>
+        <button type="submit" class="form-submit" id="checkoutBtn">PROCEED TO PAYMENT</button>
+      </form>
+    </div>
+    
+    <div class="form-success" id="checkoutSuccess" style="display:none;">
+      <h3>✓ PAYMENT SUCCESSFUL</h3>
+      <p>Your ticket is secured! We've sent a confirmation to your email.</p>
+      <p style="margin-top: 10px; font-family: 'Orbitron', sans-serif; font-size: 13px; color: var(--neon);">REF: <span id="checkoutRef"></span></p>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SCRIPTS ===== -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
 // ── CONFIG ──────────────────────────────────────
 const EVENT_DATE = new Date('2027-05-01T10:00:00+01:00');
@@ -1226,10 +1257,71 @@ function filterSched(day, btn){
 }
 
 // ── TICKET HANDLER ───────────────────────────────
+let currentTicketTier = null;
+let currentTicketPrice = 0;
+let currentTicketName = '';
+
 function handleTicket(tier){
   const prices = { gate: 5000, arena: 15000, elite: 35000 };
   const names  = { gate: 'Gate Pass', arena: 'Arena Pass', elite: 'Elite VIP' };
-  alert(`You selected: X-REVIVE ${names[tier]} — ₦${prices[tier].toLocaleString()}\n\nPaystack integration goes here.\nContact: info@x-revive.com`);
+  
+  currentTicketTier = tier;
+  currentTicketPrice = prices[tier];
+  currentTicketName = names[tier];
+  
+  document.getElementById('checkoutSub').textContent = `You are purchasing a ${currentTicketName} for ₦${currentTicketPrice.toLocaleString()}.`;
+  document.getElementById('checkoutFormWrap').style.display = 'block';
+  document.getElementById('checkoutSuccess').style.display = 'none';
+  document.getElementById('checkoutForm').reset();
+  
+  openModal('checkoutModal');
+}
+
+function processPayment(event) {
+  event.preventDefault();
+  
+  const email = document.getElementById('checkoutEmail').value;
+  const name = document.getElementById('checkoutName').value;
+  const btn = document.getElementById('checkoutBtn');
+  
+  btn.textContent = 'INITIALIZING...';
+  btn.disabled = true;
+  
+  let handler = PaystackPop.setup({
+    key: 'pk_test_0000000000000000000000000000000000000000', // Replace with your live or test public key
+    email: email,
+    amount: currentTicketPrice * 100, // Amount in kobo
+    currency: 'NGN',
+    ref: 'XR_' + Math.floor((Math.random() * 1000000000) + 1),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Full Name",
+          variable_name: "name",
+          value: name
+        },
+        {
+          display_name: "Ticket Type",
+          variable_name: "ticket_type",
+          value: currentTicketName
+        }
+      ]
+    },
+    onClose: function(){
+      btn.textContent = 'PROCEED TO PAYMENT';
+      btn.disabled = false;
+    },
+    callback: function(response){
+      document.getElementById('checkoutFormWrap').style.display = 'none';
+      document.getElementById('checkoutSuccess').style.display = 'block';
+      document.getElementById('checkoutRef').textContent = response.reference;
+      
+      btn.textContent = 'PROCEED TO PAYMENT';
+      btn.disabled = false;
+    }
+  });
+  
+  handler.openIframe();
 }
 
 // ── ACTIVE NAV ON SCROLL ─────────────────────────
