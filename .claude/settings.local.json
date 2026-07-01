@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open \"/Users/user/RESPAWN  POINT/index.html\")",
+      "Read(//Users/user/**)",
+      "mcp__claude_ai_Vercel__deploy_to_vercel"
+    ]
+  }
+}

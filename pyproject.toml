@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "referee"
+version = "0.1.0"
+description = "AI Referee Infrastructure"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "click",
+    "pydantic"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "httpx"
+]
+
+[project.scripts]
+referee = "cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "api*", "cli*"]
+namespaces = false
